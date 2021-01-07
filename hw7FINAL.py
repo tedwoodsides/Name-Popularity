@@ -9,17 +9,17 @@ Created on Tue Dec  1 19:42:29 2020
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-#2a
+
+#reading in data from "https://catalog.data.gov/dataset/baby-names-from-social-security-card-applications-national-level-data"
 def read_ssn(begin_year,end_year):
-    global all_years
-    global male_count
-    global female_count
     all_years = pd.DataFrame()
     year = list(range(begin_year, end_year+1))
     for y in year:
         file = ("/Users/tedwoodsides/Downloads/names/yob"+str(y)+".txt")
         df = pd.read_csv(file, names=["names","gender","count"])
+        #create year column
         df.insert(0, "year", y)
+        #combine required data
         all_years = pd.concat([all_years, df], axis = 0)
         male = all_years[all_years.gender == "M"]
         female = all_years[all_years.gender == "F"]
